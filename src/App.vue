@@ -1,19 +1,20 @@
 <template>
   <div class="Wrapper">
     <div class="Container">
-      <CategoryComponent v-for="category in Categories" :key="category" 
+      <CategoryComponent v-for="category in categories" :key="category" 
       :color="category.color"  
       :name="category.name"
-      :quantity="category.quantity"
-      :picture="category.picture"
+      :quantity="category.productCount"
+      :picture="category.image"
       />
     </div>
 
     <div class="PromotionContainer">
-      <PromotionComponent v-for="promotion in Promotions" :key="promotion" 
+      <PromotionComponent v-for="promotion in promotions" :key="promotion" 
       :color="promotion.color"  
-      :text="promotion.text"
-      :picture="promotion.picture"
+      :text="promotion.title"
+      :picture="promotion.image"
+      :buttonColor="promotion.buttonColor"
       />
     </div>
   </div>
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import axios from 'axios';
   import CategoryComponent from './components/Category.vue';
   import PromotionComponent from './components/Promotion.vue';
   import { RouterView } from 'vue-router';
@@ -34,6 +36,10 @@
 
     data() {
     return {
+      categories : [],
+      promotions : [],
+
+    
       Categories:[
         {
           color:"#F2FCE4",
@@ -117,6 +123,103 @@
       ],
     };
   },
+  methods: {
+
+      createPromotions(){
+      axios.post('http://localhost:3000/api/promotions', {
+        "title" : 'Everyday Fresh & Clean with Our Products',
+        "url" : 'https://google.com',
+        "color" : '#F0E8D5',
+        "buttonColor" : '#3BB77E',
+        "image" : "http://localhost:5173/src/assets/image/Onion.png",
+      }),
+      axios.post('http://localhost:3000/api/promotions', {
+        "title" : 'Make your Breakfast Healthy and Easy',
+        "url" : 'https://google.com',
+        "color" : '#F3E8E8',
+        "buttonColor" : '#3BB77E',
+        "image" : "http://localhost:5173/src/assets/image/Juice.png",
+      }),
+      axios.post('http://localhost:3000/api/promotions', {
+        "title" : 'The best Organic Products Online',
+        "url" : 'https://google.com',
+        "color" : '#E7EAF3',
+        "buttonColor" : '#FDC040',
+        "image" : "http://localhost:5173/src/assets/image/OrganicVeggie.png",
+      })
+    },
+      createCategories(){
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Red Apple',
+        "productCount" : '68',
+        "color" : '#FEEFEA',
+        "image" : 'http://localhost:5173/src/assets/image/apple.png',
+      }),
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Snack',
+        "productCount" : '34',
+        "color" : '#FFF3EB',
+        "image" : 'http://localhost:5173/src/assets/image/cereal.png',
+      }),
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Black Plum',
+        "productCount" : '25',
+        "color" : '#FFF3FF',
+        "image" : './src/assets/products/blues.png',
+      }),
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Vegetables',
+        "productCount" : '65',
+        "color" : '#F2FCE4',
+        "image" : 'http://localhost:5173/src/assets/image/cabbage.png',
+      }),
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Headphone',
+        "productCount" : '33',
+        "color" : '#FFFCEB',
+        "image" : 'http://localhost:5173/src/assets/image/headphones.png',
+      }),
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Cake & Milk',
+        "productCount" : '54',
+        "color" : '#F2FCE4',
+        "image" : './src/assets/products/apricot.png',
+      }),
+      axios.post('http://localhost:3000/api/categories', {
+        "name" : 'Orange',
+        "productCount" : '63',
+        "color" : '#FFF3FF',
+        "image" : 'http://localhost:5173/src/assets/image/orange.png',
+      })
+    },
+    fetchCategories(){
+      axios.get('http://localhost:3000/api/categories')
+      .then(response => { 
+      this.categories = response.data;
+        console.log(response);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      })
+      
+    },
+    fetchPromotions(){
+      axios.get("http://localhost:3000/api/promotions")
+      .then(response => {
+        console.log(response);
+        this.promotions = response.data;
+      })
+    }
+    },
+    
+  mounted(){
+    // Mounted life cycle - will be executed every time
+    // this component is loaded
+    //this.createCategories();
+    //this.createPromotions()
+    this.fetchCategories()
+    this.fetchPromotions()
+  }
   };
 
 

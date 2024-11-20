@@ -18,7 +18,7 @@
         props: {
         color: String,
         name: String,
-        quantity: String,
+        quantity: Number,
         picture: String,
         },
     };
