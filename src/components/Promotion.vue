@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <button type="button" 
-        :style="{backgroundColor: color}"
+        :style="{backgroundColor: buttonColor}"
         class="btn"
         >
             <div class="wrapper">
@@ -23,6 +23,7 @@
         },
 
         props: {
+        buttonColor: String,
         color: String,
         text: String,
         picture: String,
