@@ -4,7 +4,7 @@
         :style="{backgroundColor: color}"
         class="btn"
         >
-            <img :src="picture" alt="item picture" width="70px" height="70px" />
+            <img :src="'http://localhost:5173/'+picture" alt="item picture" width="70px" height="70px" />
             <div class="text">
                 <span class="ItemName">{{ name }}</span>
                 <span class="ItemQuantity">{{ quantity }}</span>

@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <button type="button" 
-        :style="{backgroundColor: buttonColor}"
+        :style="{backgroundColor: color}"
         class="btn"
         >
             <div class="wrapper">
                 <span class="text">{{ text }}</span>
-                <Button @click="shopNow(text)">Shop Now</Button>
+                <Button @click="shopNow(text)" :bg-color="buttonColor">Shop Now</Button>
             </div>
-            <img :src="picture" alt="item picture" class="item-picture" />
+            <img :src="'http://localhost:5173/'+ picture" alt="item picture" class="item-picture" />
             
         </button>
     </div>

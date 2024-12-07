@@ -20,7 +20,7 @@
         :color="promotion.color"
         :text="promotion.title"
         :picture="promotion.image"
-        :buttonColor="promotion.buttonColor"
+        :buttonColor="promotion.buttonColor"      
       />
     </div>
     
@@ -72,80 +72,80 @@ export default defineComponent({
         });
     },
 
-    createPromotions() {
-      axios.post('http://localhost:3000/api/promotions', {
-        title: 'Everyday Fresh & Clean with Our Products',
-        color: '#F0E8D5',
-        buttonColor: '#3BB77E',
-        image: 'http://localhost:5173/src/assets/image/Onion.png',
-      });
+  //   createPromotions() {
+  //     axios.post('http://localhost:3000/api/promotions', {
+  //       title: 'Everyday Fresh & Clean with Our Products',
+  //       color: '#F0E8D5',
+  //       buttonColor: '#3BB77E',
+  //       image: 'http://localhost:5173/src/assets/image/Onion.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/promotions', {
-        title: 'Make your Breakfast Healthy and Easy',
-        color: '#F3E8E8',
-        buttonColor: '#3BB77E',
-        image: 'http://localhost:5173/src/assets/image/Juice.png',
-      });
+  //     axios.post('http://localhost:3000/api/promotions', {
+  //       title: 'Make your Breakfast Healthy and Easy',
+  //       color: '#F3E8E8',
+  //       buttonColor: '#3BB77E',
+  //       image: 'http://localhost:5173/src/assets/image/Juice.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/promotions', {
-        title: 'The best Organic Products Online',
-        color: '#E7EAF3',
-        buttonColor: '#FDC040',
-        image: 'http://localhost:5173/src/assets/image/OrganicVeggie.png',
-      });
-    },
+  //     axios.post('http://localhost:3000/api/promotions', {
+  //       title: 'The best Organic Products Online',
+  //       color: '#E7EAF3',
+  //       buttonColor: '#FDC040',
+  //       image: 'http://localhost:5173/src/assets/image/OrganicVeggie.png',
+  //     });
+  //   },
 
-    createCategories() {
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Red Apple',
-        productCount: '68',
-        color: '#FEEFEA',
-        image: 'http://localhost:5173/src/assets/image/apple.png',
-      });
+  //   createCategories() {
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Red Apple',
+  //       productCount: '68',
+  //       color: '#FEEFEA',
+  //       image: 'http://localhost:5173/src/assets/image/apple.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Snack',
-        productCount: '34',
-        color: '#FFF3EB',
-        image: 'http://localhost:5173/src/assets/image/cereal.png',
-      });
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Snack',
+  //       productCount: '34',
+  //       color: '#FFF3EB',
+  //       image: 'http://localhost:5173/src/assets/image/cereal.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Black Plum',
-        productCount: '25',
-        color: '#FFF3FF',
-        image: './src/assets/products/blues.png',
-      });
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Black Plum',
+  //       productCount: '25',
+  //       color: '#FFF3FF',
+  //       image: './src/assets/products/blues.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Vegetables',
-        productCount: '65',
-        color: '#F2FCE4',
-        image: 'http://localhost:5173/src/assets/image/cabbage.png',
-      });
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Vegetables',
+  //       productCount: '65',
+  //       color: '#F2FCE4',
+  //       image: 'http://localhost:5173/src/assets/image/cabbage.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Headphone',
-        productCount: '33',
-        color: '#FFFCEB',
-        image: 'http://localhost:5173/src/assets/image/headphones.png',
-      });
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Headphone',
+  //       productCount: '33',
+  //       color: '#FFFCEB',
+  //       image: 'http://localhost:5173/src/assets/image/headphones.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Cake & Milk',
-        productCount: '54',
-        color: '#F2FCE4',
-        image: './src/assets/products/apricot.png',
-      });
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Cake & Milk',
+  //       productCount: '54',
+  //       color: '#F2FCE4',
+  //       image: './src/assets/products/apricot.png',
+  //     });
 
-      axios.post('http://localhost:3000/api/categories', {
-        name: 'Orange',
-        productCount: '63',
-        color: '#FFF3FF',
-        image: 'http://localhost:5173/src/assets/image/orange.png',
-      });
-    },
-  },
+  //     axios.post('http://localhost:3000/api/categories', {
+  //       name: 'Orange',
+  //       productCount: '63',
+  //       color: '#FFF3FF',
+  //       image: 'http://localhost:5173/src/assets/image/orange.png',
+  //     });
+  //   },
+   },
 
   mounted() {
     this.fetchCategories();

@@ -1,11 +1,16 @@
 <template>
-    <div class="Container">
+    <div class="Container " :style="{background:bgColor}">
         <span class="text">Shop Now</span> 
         <i id="icon" class="fa-solid fa-arrow-right"></i>
     </div>
 </template>
 
 <script>
+export default{
+    props:{
+        bgColor: String,
+    }
+}
 
 </script>
 
