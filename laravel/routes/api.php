@@ -10,7 +10,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::controller(CategoryController::class)->prefix('categories')->group(function() {
-    Route::get('/', 'getcategories');
+    Route::get('/', 'getCategories');
     Route::post('/', 'createCategory');
     Route::get('/{categoryID}', 'getCategory');
     Route::patch('/{categoryID}', 'updateCategory');
