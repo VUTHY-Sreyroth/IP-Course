@@ -36,22 +36,18 @@ class ProductTest extends TestCase
 
     public function test_if_we_can_update_product(): void
     {
-        $request = $this->patch('/api/products/1', [
+        $payload = [
             "name" => "Honda",
             "pricing" => 999,
             "category_id" => 2,
- 
-        ]);
- 
-        $request->assertStatus(200)->assertJson([
-            "id" => $request['id'],
-            "name" => $request['name'],
-            "pricing" => $request['pricing'],
-            "category_id" => $request['category_id'],
-
-        ]);
+        ];
+    
+        $response = $this->patch('/api/products/1', $payload);
+     
+        $response->assertStatus(200)
+            ->assertJsonFragment($payload);
     }
-
+    
     public function test_if_we_can_delete_product_api(): void
     {
         $request = $this->delete('/api/products/1');
@@ -60,4 +56,6 @@ class ProductTest extends TestCase
             "pricing" => $request['pricing'],
             "category_id" => $request['category_id'],]);
     }
+
+    
 }
