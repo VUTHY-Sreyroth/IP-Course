@@ -27,6 +27,15 @@ class UploadController extends Controller
             $minioPath = 'uploads/' . $fileName;
         }
     
+        // Create a new image instance using intervention
+        $image = Image::make($file);
+        // resize the image
+        $image->resize(200,200);
+        // save thumbnail tmp to a var
+        $thumbnail = $image->stream();
+        // upload thumbnail to minio
+        $path = Storage::disk('minio')->put('thumbnails/' . $file->getClientOriginalName(), $thumbnail);
+        
         return response()->json([
             'local_path' => $path,
             'minio_path' => $minioPath,
