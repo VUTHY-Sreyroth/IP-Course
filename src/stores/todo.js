@@ -1,60 +1,71 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import axios from 'axios'
 
 export const useTodoStore = defineStore("todo", {
   state: () => ({
-    todos: JSON.parse(localStorage.getItem("todos")) || [], // Load todos from localStorage
+    todos: [],
   }),
   getters: {
-    countTodos: (state) => state.todos.length, // Getter to count todos
+    countTodos: (state) => state.todos.length,
   },
   actions: {
-    // Fetch todos from the backend
+    
     async fetchTodos() {
-      try {
-        const response = await axios.get("http://localhost:3100/tasks");
-        if (Array.isArray(response.data)) {
-          this.todos = response.data;
-          localStorage.setItem("todos", JSON.stringify(this.todos)); // Save to localStorage
-        } else {
-          console.error("Unexpected response format:", response.data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch todos:", error.message);
-      }
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve([
+            {
+              id: 1,
+              name: "Clean house",
+              description: "cleaning house in detail .....",
+              createdAt: "2024-15-07 07:50:00",
+              completedAt: null,
+            },
+            {
+              id: 2,
+              name: "Do homework",
+              description: "Instruction on doing homework ....",
+              createdAt: "2024-05-07 08:00:00",
+              completedAt: "2024-05-07 08:10:00",
+            },
+          ]);
+        }, 1000);
+      }).then((todos) => (this.todos = todos));
     },
-
-    // Toggle the completion status of a todo
     toggleStatus(id) {
-      const foundIndex = this.todos.findIndex((t) => t.id === id);
+      const foundIndex = this.todos.findIndex((t) => t.id == id);
       if (foundIndex >= 0) {
-        const todo = this.todos[foundIndex];
-        todo.completedAt = todo.completedAt ? null : new Date().toISOString();
-        localStorage.setItem("todos", JSON.stringify(this.todos)); // Update localStorage
-      } else {
-        console.warn(`Todo with id ${id} not found.`);
+        if (this.todos[foundIndex].completedAt != null) {
+          this.todos[foundIndex].completedAt = null;
+        } else {
+          this.todos[foundIndex].completedAt = new Date().toISOString();
+        }
       }
     },
-
-    // Add a new todo
-    addTodo(todoName) {
-      const newId = this.todos.length > 0
-        ? Math.max(...this.todos.map((t) => t.id)) + 1
-        : 1; // Generate a unique ID
+    addTodo(todo) {
       this.todos.push({
-        id: newId,
-        name: todoName,
+        id: this.todos.length + 1,
+        name: todo,
         description: "description",
         createdAt: new Date().toISOString(),
         completedAt: null,
       });
-      localStorage.setItem("todos", JSON.stringify(this.todos)); // Save to localStorage
+      this.todos = JSON.parse(JSON.stringify(this.todos));
     },
-
-    // Clear all todos
-    clearAll() {
+    async clearAll() {
+      const allTodos = [...this.todos];
+      for (const todo of allTodos) {
+        await axios.delete(`http://localhost:3100/tasks/${todo.id}`);
+      }
       this.todos = [];
-      localStorage.removeItem("todos"); // Clear localStorage
     },
+    async fetchTodos() {
+      try {
+        const response = await axios.get('http://localhost:3100/tasks');
+        this.todos = response.data; 
+      } catch (error) {
+        console.error('Failed to fetch todos:', error);
+      }
+    }
   },
 });

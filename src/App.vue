@@ -53,7 +53,7 @@ export default {
 @import "https://unicons.iconscout.com/release/v4.0.0/css/line.css";
 
 .clear-button {
-  background-color: #000000;
+  background-color: blue;
   color: white;
   border: none;
   padding: 10px 20px;
