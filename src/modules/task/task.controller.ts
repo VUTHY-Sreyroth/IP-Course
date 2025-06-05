@@ -6,9 +6,11 @@ import {
   Param,
   Patch,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { TasksService } from './task.service'; // Correct service name
-import { Task } from './task.entity'; // Import the Task entity if needed
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -24,9 +26,15 @@ export class TasksController {
     return this.taskService.findAll(); // Add this to expose findAll
   }
 
-  @Post('/')
-  create(@Body() taskData: Partial<Task>) {
-    return this.taskService.create(taskData); // Matches service method name
+  // @Post('/')
+  // Create(@Body() taskData: Partial<Task>) {
+  //   return this.taskService.create(taskData); // Matches service method name
+  // }
+
+  @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  create(@Body() createTaskDto: CreateTaskDto) {
+    return this.taskService.create(createTaskDto);
   }
 
   @Patch('/:id')
@@ -38,4 +46,10 @@ export class TasksController {
   deleteTask(@Param('id') id: string) {
     return this.taskService.remove(Number(id)); // Matches service method name
   }
+
+  @Delete('/clear-all')
+  clearAllTasks() {
+    return this.taskService.removeAll();
+  }
+
 }
