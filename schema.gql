@@ -1,0 +1,69 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Book {
+  id: Int!
+  title: String!
+  author: String!
+  price: Float!
+}
+
+type Student {
+  id: ID!
+  name: String!
+  idCard: String!
+  class: String!
+}
+
+type Attendance {
+  id: ID!
+  session: String!
+  status: AttendanceStatus!
+  marker: String!
+  student_id: Int!
+  className: String!
+}
+
+enum AttendanceStatus {
+  P
+  AP
+  L
+  A
+}
+
+type Query {
+  getAllBooks: [Book!]!
+  getBookById(id: Float!): Book
+  getStudentsByClass(className: String!): [Student!]!
+  getAttendanceById(id: Int!): Attendance
+  getAttendanceByStudentId(student_id: Int!): [Attendance!]!
+  countByClass(className: String!): Int!
+  countByStudentId(student_id: Int!): Int!
+}
+
+type Mutation {
+  addBook(title: String!, price: Float!): Book!
+  updateBook(id: Float!, title: String!, price: Float!): Book!
+  deleteBook(id: Float!): Boolean!
+  createStudent(input: CreateStudentInput!): Student!
+  removeStudent(id: Int!): Boolean!
+  updateStudent(id: Int!, input: CreateStudentInput!): Student
+  markAttendance(input: CreateAttendanceInput!): Attendance!
+  removeAttendance(id: Int!): Boolean!
+  updateAttendance(id: Int!, input: CreateAttendanceInput!): Attendance
+}
+
+input CreateStudentInput {
+  name: String!
+  idCard: String!
+  class: String!
+}
+
+input CreateAttendanceInput {
+  session: String!
+  status: AttendanceStatus!
+  marker: String!
+  student_id: Int!
+  className: String!
+}
